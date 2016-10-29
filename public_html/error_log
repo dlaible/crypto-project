@@ -1,0 +1,15 @@
+[26-Oct-2016 21:00:30] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0' at line 1 for query 0
+[26-Oct-2016 21:03:06] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0' at line 1 for query 0
+[26-Oct-2016 21:42:34] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`); made by wp_handle_comment_submission
+[26-Oct-2016 21:45:42] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`); made by wp_handle_comment_submission
+[26-Oct-2016 21:46:56] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`); made by wp_handle_comment_submission
+[26-Oct-2016 21:47:52] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`); made by wp_handle_comment_submission
+[26-Oct-2016 21:51:01] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`); made by wp_handle_comment_submission
+[26-Oct-2016 21:54:15] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`); made by wp_handle_comment_submission
+[26-Oct-2016 22:03:46] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`);
+[26-Oct-2016 22:05:03] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`);
+[26-Oct-2016 22:05:57] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`);
+[26-Oct-2016 22:07:09] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`);
+[26-Oct-2016 22:07:33] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`);
+[26-Oct-2016 22:09:14] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`);
+[26-Oct-2016 22:12:43] WordPress database error Subquery returns more than 1 row for query SELECT comment_ID FROM `a7415375_cdb`.`cwp_comments` WHERE comment_ID >= (SELECT comment_ID FROM `cwp_comments`);
