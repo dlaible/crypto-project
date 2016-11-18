@@ -17,15 +17,27 @@ require( dirname(__FILE__) . '/wp-load.php' );
 
 nocache_headers();
 
-$comment = wp_handle_comment_submission( wp_unslash( $_POST ) );
-if ( is_wp_error( $comment ) ) {
-	$data = intval( $comment->get_error_data() );
-	if ( ! empty( $data ) ) {
-		wp_die( '<p>' . $comment->get_error_message() . '</p>', __( 'Comment Submission Failure' ), array( 'response' => $data, 'back_link' => true ) );
-	} else {
-		exit;
-	}
+/*
+Change:
+insert comment using simple sql query to allow for sql injection attack
+*/
+global $wpdb;
+$comment_msg;
+if ( isset( $_POST['comment'] ) && is_string( $_POST['comment'] ) ) {
+        $comment_msg = trim( $_POST['comment'] );
 }
+$sql = "INSERT INTO `a7415375_cdb`.`cwp_comments` (`comment_ID`, `comment_post_ID`, `comment_author`, `comment_author_email`, `comment_author_url`, `comment_author_IP`, `comment_date`, `comment_date_gmt`, `comment_content`, `comment_karma`, `comment_approved`, `comment_agent`, `comment_type`, `comment_parent`, `user_id`) VALUES (NULL, '1', 'hacker', 'prachtaine33@gmail.com', '', '', '2016-10-26 12:00:00', '2016-10-26 10:00:00', '" . $comment_msg . "', '0', '1', '', '', '0', '0');";
+$wpdb->query($sql);
+
+$comment = wp_handle_comment_submission( wp_unslash( $_POST ) );
+// if ( is_wp_error( $comment ) ) {
+// 	$data = intval( $comment->get_error_data() );
+// 	if ( ! empty( $data ) ) {
+// 		wp_die( '<p>' . $comment->get_error_message() . '</p>', __( 'Comment Submission Failure' ), array( 'response' => $data, 'back_link' => true ) );
+// 	} else {
+// 		exit;
+// 	}
+// }
 
 $user = wp_get_current_user();
 
@@ -37,7 +49,11 @@ $user = wp_get_current_user();
  * @param WP_Comment $comment Comment object.
  * @param WP_User    $user    User object. The user may not exist.
  */
-do_action( 'set_comment_cookies', $comment, $user );
+/*
+Change:
+don't post comment like this anymore
+*/
+//do_action( 'set_comment_cookies', $comment, $user );
 
 $location = empty( $_POST['redirect_to'] ) ? get_comment_link( $comment ) : $_POST['redirect_to'] . '#comment-' . $comment->comment_ID;
 
@@ -52,4 +68,5 @@ $location = empty( $_POST['redirect_to'] ) ? get_comment_link( $comment ) : $_PO
 $location = apply_filters( 'comment_post_redirect', $location, $comment );
 
 wp_safe_redirect( $location );
+
 exit;
