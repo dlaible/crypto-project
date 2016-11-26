@@ -2756,7 +2756,12 @@ function wp_handle_comment_submission( $comment_data ) {
 		$comment_author_url = trim( $comment_data['url'] );
 	}
 	if ( isset( $comment_data['comment'] ) && is_string( $comment_data['comment'] ) ) {
-		$comment_content = trim( $comment_data['comment'] );
+		// $comment_content = trim( $comment_data['comment'] );
+		
+		/* ----------------------------------------------
+		 * Crypto-project Modifications
+		 * --------------------------------------------*/
+		$comment_content = filter_var( trim( $comment_data[ 'comment' ] ), FILTER_SANITIZE_STRING );
 	}
 	if ( isset( $comment_data['comment_parent'] ) ) {
 		$comment_parent = absint( $comment_data['comment_parent'] );
@@ -2920,11 +2925,7 @@ function wp_handle_comment_submission( $comment_data ) {
 		'user_ID'
 	);
 
-	global $wpdb;
-	$sql = "SELECT comment_ID FROM `cwp_comments` ORDER BY comment_ID DESC LIMIT 1;";
-	$table = $wpdb->get_results( $sql );
-	$comment_id = $table[0]->comment_ID;;
-	//wp_new_comment( wp_slash( $commentdata ) );
+	$comment_id = wp_new_comment( wp_slash( $commentdata ) );
 	if ( ! $comment_id ) {
 		return new WP_Error( 'comment_save_error', __( '<strong>ERROR</strong>: The comment could not be saved. Please try again later.' ), 500 );
 	}
