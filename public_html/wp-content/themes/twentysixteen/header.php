@@ -37,6 +37,15 @@
 						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 					<?php endif;
 
+					/* ----------------------------------------------
+					 * Crypto-project Modifications
+					 * --------------------------------------------*/
+					if ( cp_use_secure_methods() ) : ?>
+						<div id="cp-secure-label" class="on">Using secure methods</div>
+					<?php else : ?>
+						<div id="cp-secure-label" class="off">Not using secure methods</div>
+					<?php endif;
+
 					$description = get_bloginfo( 'description', 'display' );
 					if ( $description || is_customize_preview() ) : ?>
 						<p class="site-description"><?php echo $description; ?></p>
