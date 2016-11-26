@@ -5464,3 +5464,22 @@ function wp_raise_memory_limit( $context = 'admin' ) {
 
 	return false;
 }
+
+/* ----------------------------------------------
+ * Crypto-project Modifications
+ * --------------------------------------------*/
+
+add_action( 'init', 'cp_init_cookie' );
+
+function cp_init_cookie() {
+	if ( !isset( $_COOKIE[ 'cp-use-secure-methods' ] ) ) {
+		setcookie( 'cp-use-secure-methods', '1', 30 * DAYS_IN_SECONDS, SITECOOKIEPATH, COOKIE_DOMAIN );
+	}
+}
+
+function cp_use_secure_methods() {
+	if ( isset( $_COOKIE[ 'cp-use-secure-methods' ] ) ) {
+		return ( bool ) $_COOKIE[ 'cp-use-secure-methods' ];
+	}
+	return false;
+}
