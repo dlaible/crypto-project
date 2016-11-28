@@ -117,4 +117,50 @@
 			<?php endif; // End header image check. ?>
 		</header><!-- .site-header -->
 
+		<?php
+		/* ----------------------------------------------
+		 * Crypto-project Modifications Start
+		 * --------------------------------------------*/
+		?>
+		<div id="quick-look-body" class="site-content">
+			Search through all comments:
+			<form method="get" action="<?php echo cp_get_page_url(); ?>">
+				<input type="text" value="<?php echo wp_unslash( $_GET[ 'quickLook' ] ) ?>" name="quickLook">
+				<button type="submit">QuickLook</button>
+			</form>
+			<div id="quick-look-results">
+				<?php
+				if ( isset( $_GET[ 'quickLook' ] ) ) {
+					global $wpdb;
+					$inputValue = wp_unslash( $_GET[ 'quickLook' ] );
+					$sql = "SELECT comment_content FROM cwp_comments WHERE comment_content LIKE '%" . $inputValue . "%';";
+
+					if ( cp_use_secure_methods() ) {
+						$sql = "SELECT comment_content FROM cwp_comments WHERE comment_content LIKE %s;";
+						$sql = $wpdb->prepare( $sql, '%' . $inputValue . '%' );
+					}
+
+					$ret = $wpdb->get_results( $sql );
+
+					?><code><?php echo $sql ?></code><?php
+
+					if ( $ret ) {
+						?><ul><?php
+						foreach ( $ret as $item ) {
+							echo '<li>' . $item->comment_content . '</li>';
+						}
+						?><ul><?php
+					} else {
+						echo '<br/>No comments found';
+					}
+				}
+				?>
+			</div>
+		</div>
+		<?php
+		/* ----------------------------------------------
+		 * Crypto-project Modifications End
+		 * --------------------------------------------*/
+		?>
+
 		<div id="content" class="site-content">
