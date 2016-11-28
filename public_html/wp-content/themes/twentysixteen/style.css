@@ -3993,10 +3993,25 @@ p > video {
     font-size: 14px;
 }
 
-#cp-secure-label.on {
+#cp-secure-label button {
+    padding: 2px 7px;
+    font-size: 14px;
+}
+
+#cp-secure-label.on,
+#cp-secure-label.off button {
 	background: green;
 }
 
-#cp-secure-label.off {
+#cp-secure-label.off,
+#cp-secure-label.on button {
 	background: red;
+}
+
+#quick-look-body {
+	padding-bottom: 2em;
+}
+
+#quick-look-body input {
+	width: 20em;
 }

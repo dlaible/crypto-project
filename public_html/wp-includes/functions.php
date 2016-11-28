@@ -5471,14 +5471,27 @@ function wp_raise_memory_limit( $context = 'admin' ) {
 
 add_action( 'init', 'cp_init_cookie' );
 
+function cp_get_page_url() {
+	global $wp;
+	return home_url( add_query_arg( array(), $wp->request ) );
+}
+
 function cp_init_cookie() {
-	if ( !isset( $_COOKIE[ 'cp-use-secure-methods' ] ) ) {
-		setcookie( 'cp-use-secure-methods', '1', 30 * DAYS_IN_SECONDS, SITECOOKIEPATH, COOKIE_DOMAIN );
+	if ( isset( $_GET[ 'setSecureMethod' ] ) ) {
+		cp_set_cookie( $_GET[ 'setSecureMethod' ] );
+	} else if ( !isset( $_COOKIE[ 'cp-use-secure-methods' ] ) ) {
+		cp_set_cookie();
 	}
 }
 
+function cp_set_cookie( $val = 1 ) {
+	setcookie( 'cp-use-secure-methods', $val, 30 * DAYS_IN_SECONDS, SITECOOKIEPATH, COOKIE_DOMAIN );
+}
+
 function cp_use_secure_methods() {
-	if ( isset( $_COOKIE[ 'cp-use-secure-methods' ] ) ) {
+	if ( isset( $_GET[ 'setSecureMethod' ] ) ) {
+		return ( bool ) $_GET[ 'setSecureMethod' ];
+	} else if ( isset( $_COOKIE[ 'cp-use-secure-methods' ] ) ) {
 		return ( bool ) $_COOKIE[ 'cp-use-secure-methods' ];
 	}
 	return false;

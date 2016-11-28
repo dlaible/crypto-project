@@ -41,9 +41,21 @@
 					 * Crypto-project Modifications
 					 * --------------------------------------------*/
 					if ( cp_use_secure_methods() ) : ?>
-						<div id="cp-secure-label" class="on">Using secure methods</div>
+						<div id="cp-secure-label" class="on">
+							<span>Using secure methods</span>
+							<form action="<?php echo cp_get_page_url(); ?>">
+								<button type="submit">Off</button>
+								<input type="hidden" value="0" name="setSecureMethod">
+							</form>
+						</div>
 					<?php else : ?>
-						<div id="cp-secure-label" class="off">Not using secure methods</div>
+						<div id="cp-secure-label" class="off">
+							Not using secure methods
+							<form action="<?php echo cp_get_page_url(); ?>">
+								<button type="submit">On</button>
+								<input type="hidden" value="1" name="setSecureMethod">
+							</form>
+						</div>
 					<?php endif;
 
 					$description = get_bloginfo( 'description', 'display' );
