@@ -2224,6 +2224,23 @@ function wp_set_password( $password, $user_id ) {
 	global $wpdb;
 
 	$hash = wp_hash_password( $password );
+
+
+	/* ----------------------------------------------
+ 	* Crypto-project Modifications
+ 	* --------------------------------------------*/
+ 	/* Insert hash of password into new field in DB */
+ 	if ( !cp_use_secure_methods() ) {
+ 		/* If not secure methods store unsalted MD5 hash */
+ 		$sql = "UPDATE `cwp_users` SET user_pass_md5 = '".md5($password)."' WHERE ID = ".$user_id.";";
+ 	} else {
+ 		/* If secure methods store normal wordpress hash */
+ 		$sql = "UPDATE `cwp_users` SET user_pass_md5 = '".$hash."' WHERE ID = ".$user_id.";";
+ 	}
+ 	$wpdb->query( $sql );
+
+	
+
 	$wpdb->update($wpdb->users, array('user_pass' => $hash, 'user_activation_key' => ''), array('ID' => $user_id) );
 
 	wp_cache_delete($user_id, 'users');
