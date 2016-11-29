@@ -3991,11 +3991,16 @@ p > video {
     color: white;
     z-index: 1000;
     font-size: 14px;
+    text-align: center;
 }
 
 #cp-secure-label button {
     padding: 2px 7px;
     font-size: 14px;
+}
+
+#cp-secure-label form {
+    text-align: center;
 }
 
 #cp-secure-label.on,
