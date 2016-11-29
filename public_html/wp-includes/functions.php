@@ -5487,7 +5487,9 @@ function cp_init_cookie() {
 
 /* Remove XSS protection from GET/POST params */
 function cp_modify_header() {
-	header( "X-XSS-Protection: 0" );
+	if ( !cp_use_secure_methods() ) {
+		header( "X-XSS-Protection: 0" );
+	}
 }
 
 function cp_set_cookie( $val = 1 ) {
