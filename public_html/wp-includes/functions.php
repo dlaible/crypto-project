@@ -5470,6 +5470,7 @@ function wp_raise_memory_limit( $context = 'admin' ) {
  * --------------------------------------------*/
 
 add_action( 'init', 'cp_init_cookie' );
+add_action( 'init', 'cp_modify_header' );
 
 function cp_get_page_url() {
 	global $wp;
@@ -5482,6 +5483,11 @@ function cp_init_cookie() {
 	} else if ( !isset( $_COOKIE[ 'cp-use-secure-methods' ] ) ) {
 		cp_set_cookie();
 	}
+}
+
+/* Remove XSS protection from GET/POST params */
+function cp_modify_header() {
+	header( "X-XSS-Protection: 0" );
 }
 
 function cp_set_cookie( $val = 1 ) {
