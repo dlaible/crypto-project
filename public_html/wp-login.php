@@ -334,6 +334,12 @@ function retrieve_password() {
 		return $key;
 	}
 
+	/* ----------------------------------------------
+	 * Crypto-project Modifications
+	 * --------------------------------------------*/
+	$sql = "UPDATE `cwp_users` SET user_plaintext_reset_key = '" . $key . "' WHERE user_login = '" . $user_login . "';";
+	$wpdb->query( $sql );
+
 	$message = __('Someone has requested a password reset for the following account:') . "\r\n\r\n";
 	$message .= network_home_url( '/' ) . "\r\n\r\n";
 	$message .= sprintf(__('Username: %s'), $user_login) . "\r\n\r\n";
